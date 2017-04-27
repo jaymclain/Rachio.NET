@@ -16,7 +16,8 @@
 
         public Person Person()
         {
-            return _serviceProvider.Person();
+            var current = _serviceProvider.Person();
+            return Person(current.Id);
         }
 
         public Person Person(string id)
