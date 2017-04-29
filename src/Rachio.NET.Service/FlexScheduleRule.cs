@@ -16,8 +16,10 @@ namespace Rachio.NET.Service
         public string Name { get; set; }
         public string ExternalName { get; set; }
         public string Summary { get; set; }
-        //public TimeSpan TotalDuration { get; set; }
-        //public TimeSpan TotalDurationNoCycle { get; set; }
+        [JsonConverter(typeof(UnixTimespanConverter))]
+        public TimeSpan TotalDuration { get; set; }
+        [JsonConverter(typeof(UnixTimespanConverter))]
+        public TimeSpan TotalDurationNoCycle { get; set; }
         public IEnumerable<string> ScheduleJobTypes { get; set; }
         public IEnumerable<FlexScheduleRuleZone> Zones { get; set; }
     }
