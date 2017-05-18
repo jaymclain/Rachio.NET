@@ -5,7 +5,7 @@ using Rachio.NET.Service.Infrastructure;
 
 namespace Rachio.NET.Service
 {
-    public class Person
+    public class Person : Entity
     {
         public string Id { get; set; }
         [JsonConverter(typeof(UnixEpochDateTimeConverter))]

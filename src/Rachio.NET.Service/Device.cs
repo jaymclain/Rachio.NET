@@ -5,7 +5,7 @@ using Rachio.NET.Service.Infrastructure;
 
 namespace Rachio.NET.Service
 {
-    public class Device
+    public class Device : Entity
     {
         public string Id { get; set; }
         [JsonConverter(typeof(UnixEpochDateTimeConverter))]
@@ -27,5 +27,21 @@ namespace Rachio.NET.Service
         public int Zip { get; set; }
         public IEnumerable<FlexScheduleRule> FlexScheduleRules { get; set; }
         public IEnumerable<Zone> Zones { get; set; }
+
+        public CurrentSchedule CurrentSchedule()
+        {
+            var schdeule = ServiceProvider.GetAsync<CurrentSchedule>("device", Id, "current_schedule").Result;
+            return schdeule;
+        }
+    }
+
+    public class CurrentSchedule : Entity
+    {
+        public CurrentSchedule() { }
+
+        public string DeviceId { get; set; }
+        public string ScheudleId { get; set; }
+        public string Type { get; set; }
+        public string Status { get; set; }
     }
 }

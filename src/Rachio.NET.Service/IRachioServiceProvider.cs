@@ -1,8 +1,9 @@
-﻿namespace Rachio.NET.Service
+﻿using System.Threading.Tasks;
+
+namespace Rachio.NET.Service
 {
-    interface IRachioServiceProvider
+    public interface IRachioServiceProvider
     {
-        Person Person();
-        Person Person(string id);
+        Task<T> GetAsync<T>(string entity, string entityId = null, string action = null) where T : Entity, new();
     }
 }
