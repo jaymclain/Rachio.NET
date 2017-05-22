@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rachio.NET.Service
+namespace Rachio.NET.Service.Model
 {
     public class CustomSlope
     {

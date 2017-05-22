@@ -1,4 +1,6 @@
-﻿namespace Rachio.NET.Service
+﻿using Rachio.NET.Service.Model;
+
+namespace Rachio.NET.Service
 {
     public class RachioService
     {

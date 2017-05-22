@@ -2,6 +2,7 @@
 using System.Reflection;
 using Newtonsoft.Json;
 using Rachio.NET.Service.Infrastructure;
+using Rachio.NET.Service.Model;
 
 namespace Rachio.NET.Service
 {
@@ -18,6 +19,11 @@ namespace Rachio.NET.Service
                 .Select(t => new EntityJsonConverter(t, serviceProvider))
                 .Cast<JsonConverter>()
                 .ToArray();
+        }
+
+        public string Serialize(object value)
+        {
+            return JsonConvert.SerializeObject(value);
         }
 
         public T DeserializeObject<T>(string content)

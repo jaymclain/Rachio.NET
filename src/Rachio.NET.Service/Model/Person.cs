@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Rachio.NET.Service.Infrastructure;
 
-namespace Rachio.NET.Service
+namespace Rachio.NET.Service.Model
 {
     public class Person : Entity
     {
-        public string Id { get; set; }
         [JsonConverter(typeof(UnixEpochDateTimeConverter))]
         public DateTime CreateDate { get; set; }
         public bool Deleted { get; set; }

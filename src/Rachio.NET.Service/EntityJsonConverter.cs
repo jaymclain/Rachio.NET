@@ -1,5 +1,6 @@
 ﻿using System;
 using Rachio.NET.Service.Infrastructure;
+using Rachio.NET.Service.Model;
 
 namespace Rachio.NET.Service
 {

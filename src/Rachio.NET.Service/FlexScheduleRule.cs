@@ -21,6 +21,6 @@ namespace Rachio.NET.Service
         [JsonConverter(typeof(UnixTimespanConverter))]
         public TimeSpan TotalDurationNoCycle { get; set; }
         public IEnumerable<string> ScheduleJobTypes { get; set; }
-        public IEnumerable<FlexScheduleRuleZone> Zones { get; set; }
+        public IEnumerable<ScheduleZone> Zones { get; set; }
     }
 }

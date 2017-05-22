@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Rachio.NET.Service.Infrastructure;
 
-namespace Rachio.NET.Service
+namespace Rachio.NET.Service.Model
 {
     public class CustomSoil
     {
