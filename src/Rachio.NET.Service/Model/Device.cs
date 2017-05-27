@@ -91,8 +91,8 @@ namespace Rachio.NET.Service.Model
         /// <summary>
         /// Rain delay device
         /// </summary>
-        /// <param name="duration">Duration in seconds. Range is 0 to 604800 (7 days)</param>
-        public void RainDelay(int? duration = null)
+        /// <param name="duration">Duration in seconds. Range is 0 to 604800 (7 days). Default is 1 day.</param>
+        public void RainDelay(int duration = 86400)
         {
             // device/{id}/rain_delay
             ServiceProvider.PutAsync(DeviceEntity, new { id = Id, duration }, RainDelayAction);

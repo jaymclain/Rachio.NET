@@ -14,6 +14,9 @@ namespace Rachio.NET.Service.Model
 {
     public class Zone : Entity
     {
+        private const string ZoneEntity = "zone";
+        private const string StartAction = "start";
+
         public int ZoneNumber { get; set; }
         public string Name { get; set; }
         public Uri ImageUrl { get; set; }
@@ -43,5 +46,14 @@ namespace Rachio.NET.Service.Model
         public CustomSlope CustomSlope { get; set; }
         public CustomSoil CustomSoil { get; set; }
         //public WateringAdjustmentRuntimes
+
+        /// <summary>
+        /// Start a zone
+        /// </summary>
+        /// <param name="duration">Duration in seconds. Range is 0 to 10800 (3 hours). Default is 15 minutes.</param>
+        public void Start(int duration = 900)
+        {
+            ServiceProvider.PutAsync(ZoneEntity, new { id = Id, duration }, StartAction);
+        }
     }
 }

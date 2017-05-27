@@ -13,9 +13,10 @@ namespace Rachio.NET.Service
 {
     public class RachioService
     {
+        private const string InfoAction = "info";
         private const string PersonEntity = "person";
         private const string DeviceEntity = "device";
-        private const string InfoAction = "info";
+        private const string ZoneEntity = "zone";
 
         private readonly IRachioServiceProvider _serviceProvider;
 
@@ -46,6 +47,11 @@ namespace Rachio.NET.Service
         {
             // device/{id}
             return _serviceProvider.GetAsync<Device>(DeviceEntity, id).Result;
+        }
+
+        public Zone Zone(string id)
+        {
+            return _serviceProvider.GetAsync<Zone>(ZoneEntity, id).Result;
         }
     }
 }
