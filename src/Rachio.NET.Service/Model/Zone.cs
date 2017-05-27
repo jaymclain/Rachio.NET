@@ -6,10 +6,9 @@
 //   Defines the Zone type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 using System;
 using Newtonsoft.Json;
-using Rachio.NET.Service.Infrastructure;
+using Rachio.NET.Service.Infrastructure.Json;
 
 namespace Rachio.NET.Service.Model
 {
@@ -26,15 +25,15 @@ namespace Rachio.NET.Service.Model
         public double Efficiency { get; set; }
         public double FixedRuntime { get; set; }
         public double ManagementAllowedDepletion { get; set; }
-        [JsonConverter(typeof(UnixEpochDateTimeConverter))]
+        [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
         public DateTime LastWateredDate { get; set; }
-        [JsonConverter(typeof(UnixTimespanConverter))]
+        [JsonConverter(typeof(UnixTimeSpanJsonConverter))]
         public TimeSpan LastWateredDuration { get; set; }
-        [JsonConverter(typeof(UnixTimespanConverter))]
+        [JsonConverter(typeof(UnixTimeSpanJsonConverter))]
         public TimeSpan RunTime { get; set; }
-        [JsonConverter(typeof(UnixTimespanConverter))]
+        [JsonConverter(typeof(UnixTimeSpanJsonConverter))]
         public TimeSpan RunTimeNoMultiplier { get; set; }
-        [JsonConverter(typeof(UnixTimespanConverter))]
+        [JsonConverter(typeof(UnixTimeSpanJsonConverter))]
         public TimeSpan MaxRunTime { get; set; }
         public bool ScheduleDataModified { get; set; }
         public int YardAreaSquareFeet { get; set; }

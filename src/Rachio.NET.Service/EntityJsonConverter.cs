@@ -1,5 +1,13 @@
-﻿using System;
-using Rachio.NET.Service.Infrastructure;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EntityJsonConverter.cs" company="HomeRun Software Systems">
+//   Copyright (c) HomeRun Software Systems
+// </copyright>
+// <summary>
+//   Defines the EntityJsonConverter type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+using System;
+using Rachio.NET.Service.Infrastructure.Json;
 using Rachio.NET.Service.Model;
 
 namespace Rachio.NET.Service

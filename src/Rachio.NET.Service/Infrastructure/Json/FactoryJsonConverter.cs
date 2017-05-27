@@ -1,9 +1,17 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FactoryJsonConverter.cs" company="HomeRun Software Systems">
+//   Copyright (c) HomeRun Software Systems
+// </copyright>
+// <summary>
+//   Defines the FactoryJsonConverter type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+using System;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Rachio.NET.Service.Infrastructure
+namespace Rachio.NET.Service.Infrastructure.Json
 {
     public class FactoryJsonConverter : JsonConverter
     {

@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 using System;
 using Newtonsoft.Json;
-using Rachio.NET.Service.Infrastructure;
+using Rachio.NET.Service.Infrastructure.Json;
 
 namespace Rachio.NET.Service.Model
 {
@@ -18,11 +18,11 @@ namespace Rachio.NET.Service.Model
         public string ScheduleId { get; set; }
         public string Type { get; set; }
         public string Status { get; set; }
-        [JsonConverter(typeof(UnixEpochDateTimeConverter))]
+        [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
         public DateTime StartDate { get; set; }
         public int Duration { get; set; }
         public string ZoneId { get; set; }
-        [JsonConverter(typeof(UnixEpochDateTimeConverter))]
+        [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
         public DateTime ZoneStartDate { get; set; }
         public int ZoneDuration { get; set; }
         public int CycleCount { get; set; }

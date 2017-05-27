@@ -1,26 +1,28 @@
-﻿using System;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UnixEpochDateTimeConverter.cs" company="HomeRun Software Systems">
+//   Copyright (c) HomeRun Software Systems
+// </copyright>
+// <summary>
+//   Defines the UnixEpochDateTimeConverter type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 
 namespace Rachio.NET.Service.Infrastructure
 {
-    public class UnixEpochDateTimeConverter : DateTimeConverterBase
+    public class UnixEpochDateTimeConverter
     {
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public long Convert(DateTime date)
         {
-            var date = (DateTime) value;
-            writer.WriteRawValue((date - Epoch).TotalMilliseconds + "000");
+           return (long)(date - Epoch).TotalMilliseconds;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public DateTime Convert(long millisecondsSinceEpoch)
         {
-            if (reader.Value == null)
-                return null;
-
-            var ms = (long)reader.Value / 1000.0;
-            return Epoch.AddMilliseconds(ms);
+            return Epoch.AddMilliseconds(millisecondsSinceEpoch);
         }
     }
 }

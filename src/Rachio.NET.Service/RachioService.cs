@@ -1,4 +1,13 @@
-﻿using Rachio.NET.Service.Model;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="RachioService.cs" company="HomeRun Software Systems">
+//   Copyright (c) HomeRun Software Systems
+// </copyright>
+// <summary>
+//   Defines the RachioService type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using Rachio.NET.Service.Model;
 
 namespace Rachio.NET.Service
 {
@@ -10,14 +19,14 @@ namespace Rachio.NET.Service
 
         private readonly IRachioServiceProvider _serviceProvider;
 
-        public static RachioService Create(ServiceOptions options)
-        {
-            return new RachioService(options);
-        }
-
         public RachioService(ServiceOptions serviceOptions)
         {
             _serviceProvider = new RachioServiceProvider(serviceOptions);
+        }
+
+        public static RachioService Create(ServiceOptions options)
+        {
+            return new RachioService(options);
         }
 
         public Person Person()

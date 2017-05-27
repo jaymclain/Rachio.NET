@@ -1,7 +1,15 @@
-﻿using System.Linq;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="RachioEntitySerializer.cs" company="HomeRun Software Systems">
+//   Copyright (c) HomeRun Software Systems
+// </copyright>
+// <summary>
+//   Defines the RachioEntitySerializer type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
-using Rachio.NET.Service.Infrastructure;
+using Rachio.NET.Service.Infrastructure.Json;
 using Rachio.NET.Service.Model;
 
 namespace Rachio.NET.Service

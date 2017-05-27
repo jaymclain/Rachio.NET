@@ -1,12 +1,18 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UnixTimeSpanJsonConverter.cs" company="HomeRun Software Systems">
+//   HomeRun Software Systems
+// </copyright>
+// <summary>
+//   Defines the UnixTimeSpanJsonConverter type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+using System;
 using Newtonsoft.Json;
 
-namespace Rachio.NET.Service.Infrastructure
+namespace Rachio.NET.Service.Infrastructure.Json
 {
-    public class UnixTimespanConverter : JsonConverter
+    public class UnixTimeSpanJsonConverter : JsonConverter
     {
-        private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
@@ -15,7 +21,9 @@ namespace Rachio.NET.Service.Infrastructure
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.Value == null)
+            {
                 return null;
+            }
 
             return new TimeSpan((long)reader.Value * TimeSpan.TicksPerSecond);
         }

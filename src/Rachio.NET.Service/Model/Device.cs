@@ -9,21 +9,27 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Rachio.NET.Service.Infrastructure;
+using Rachio.NET.Service.Infrastructure.Json;
 
 namespace Rachio.NET.Service.Model
 {
+    using Rachio.NET.Service.Infrastructure;
+
     public class Device : Entity
     {
         private const string DeviceEntity = "device";
         private const string CurrentScheduleAction = "current_schedule";
         private const string EventAction = "event";
+        private const string ScheduleItemAction = "scheduleitem";
+        private const string ForecastAction = "forecast";
         private const string StopWaterAction = "stop_water";
         private const string RainDelayAction = "rain_delay";
         private const string OnAction = "on";
         private const string OffAction = "off";
 
-        [JsonConverter(typeof(UnixEpochDateTimeConverter))]
+        private static readonly UnixEpochDateTimeConverter Converter = new UnixEpochDateTimeConverter();
+
+        [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
         public DateTime CreateDate { get; set; }
         public string MacAddress { get; set; }
         public string Name { get; set; }
@@ -46,26 +52,39 @@ namespace Rachio.NET.Service.Model
 
         public CurrentSchedule CurrentSchedule()
         {
+            // device/{id}/current_schedule
             return ServiceProvider.GetAsync<CurrentSchedule>(DeviceEntity, Id, CurrentScheduleAction).Result;
         }
 
-        public Event Event(DateTime startTime, DateTime endTime)
+        public IEnumerable<Event> Events(DateTime startTime, DateTime endTime)
         {
-            return ServiceProvider.GetAsync<Event>(DeviceEntity, Id, EventAction).Result;
+            // device/{id}/event?startTime={startTime}&endTime={endTime}
+            return ServiceProvider.GetAsync<IEnumerable<Event>>(
+                DeviceEntity, 
+                Id, 
+                EventAction, 
+                new
+                {
+                    startTime = Converter.Convert(startTime),
+                    endTime = Converter.Convert(endTime)
+                }).Result;
         }
 
-        public ScheduleItem ScheduleItem()
+        public IEnumerable<ScheduleItem> ScheduleItems()
         {
-            return ServiceProvider.GetAsync<ScheduleItem>(DeviceEntity, Id).Result;
+            // device/{id}/scheduleitem
+            return ServiceProvider.GetAsync<IEnumerable<ScheduleItem>>(DeviceEntity, Id, ScheduleItemAction).Result;
         }
 
-        public Forecast Forecast(string units)
+        public Forecasts Forecast(string units = "US")
         {
-            throw new NotImplementedException();
+            // device/{id}/forecast?units={units}
+            return ServiceProvider.GetAsync<Forecasts>(DeviceEntity, Id, ForecastAction, new { units }).Result;
         }
 
         public void StopWater()
         {
+            // device/{id}/stop_water
             ServiceProvider.PutAsync(DeviceEntity, new { id = Id }, StopWaterAction).Wait();
         }
 
@@ -75,6 +94,7 @@ namespace Rachio.NET.Service.Model
         /// <param name="duration">Duration in seconds. Range is 0 to 604800 (7 days)</param>
         public void RainDelay(int? duration = null)
         {
+            // device/{id}/rain_delay
             ServiceProvider.PutAsync(DeviceEntity, new { id = Id, duration }, RainDelayAction);
         }
 
@@ -83,11 +103,13 @@ namespace Rachio.NET.Service.Model
         /// </summary>
         public void On()
         {
+            // device/{id}/on
             ServiceProvider.PutAsync(DeviceEntity, new { id = Id }, OnAction);
         }
 
         public void Off()
         {
+            // device/{id}/off
             ServiceProvider.PutAsync(DeviceEntity, new { id = Id }, OffAction);
         }
     }
