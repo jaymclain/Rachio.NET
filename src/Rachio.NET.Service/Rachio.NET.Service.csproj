@@ -3,6 +3,19 @@
   <PropertyGroup>
     <TargetFrameworks>net452;net461;netstandard1.6;netcoreapp1.1</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Rachio.NET</PackageId>
+    <Authors>Jay McLain</Authors>
+    <Company>HomeRun Software Systems</Company>
+    <Product>Rachio.NET</Product>
+    <Description>.NET Library to simplify automation of your Rachio smart spinkler controller.</Description>
+    <Version>0.1.0</Version>
+    <Copyright>Copyright (c) Jay McLain</Copyright>
+    <PackageProjectUrl>https://github.com/jaymclain/Rachio.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jaymclain/Rachio.NET</RepositoryUrl>
+    <PackageTags>rachio smart sprinker automation</PackageTags>
+    <PackageLicenseUrl>https://github.com/jaymclain/Rachio.NET/LICENSE.md</PackageLicenseUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard1.6' And '$(TargetFramework)' != 'netcoreapp1.1'">
