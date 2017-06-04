@@ -31,6 +31,11 @@ using Rachio.NET.Service.Model;
 
 namespace Rachio.NET.Service
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    /// <summary>
+    /// The main service for interaction with the Rachio Smart Sprinkler Controller
+    /// </summary>
     public class RachioService
     {
         private const string InfoAction = "info";
@@ -45,11 +50,27 @@ namespace Rachio.NET.Service
             _serviceProvider = new RachioServiceProvider(serviceOptions);
         }
 
+        /// <summary>
+        /// Creates the Rachio Smart Sprinkler Controller communications service
+        /// </summary>
+        /// <param name="options">Options for the RachioService</param>
+        /// <returns>The RachioService</returns>
+        /// <code>
+        ///     var service = RachioService.Create(new ServiceOptions { AccessToken = "{Your Access Token}" });
+        /// </code>
         public static RachioService Create(ServiceOptions options)
         {
             return new RachioService(options);
         }
 
+        /// <summary>
+        /// Retrieves the information for the person currently logged in.
+        /// </summary>
+        /// <returns>The Person entity</returns>
+        /// <code>
+        ///     var service = RachioService.Create(new ServiceOptions { AccessToken = "{Your Access Token}" });
+        ///     var person = service.Person();
+        /// </code>
         public Person Person()
         {
             // person/info
@@ -57,18 +78,33 @@ namespace Rachio.NET.Service
             return Person(current.Id);
         }
 
+        /// <summary>
+        /// Retrieves the information for a specific person
+        /// </summary>
+        /// <param name="id">A unique person id</param>
+        /// <returns>The Person entity</returns>
         public Person Person(string id)
         {
             // person/{id}
             return _serviceProvider.GetAsync<Person>(PersonEntity, id).Result;
         }
 
+        /// <summary>
+        /// Retrieve the information for a specific device
+        /// </summary>
+        /// <param name="id">A unique device id</param>
+        /// <returns>The Device entity</returns>
         public Device Device(string id)
         {
             // device/{id}
             return _serviceProvider.GetAsync<Device>(DeviceEntity, id).Result;
         }
 
+        /// <summary>
+        /// Retrieves the information for a specific zone
+        /// </summary>
+        /// <param name="id">A unique zone id</param>
+        /// <returns>The Zone entity</returns>
         public Zone Zone(string id)
         {
             return _serviceProvider.GetAsync<Zone>(ZoneEntity, id).Result;

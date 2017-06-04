@@ -33,7 +33,7 @@ using Rachio.NET.Service.Model;
 
 namespace Rachio.NET.Service
 {
-    public class EntityJsonConverter : FactoryJsonConverter
+    internal class EntityJsonConverter : FactoryJsonConverter
     {
         private readonly Type _type;
         private readonly IRachioServiceProvider _serviceProvider;

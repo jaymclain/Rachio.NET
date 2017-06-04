@@ -18,6 +18,14 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+    <DocumentationFile>bin\Debug\net452\Rachio.NET.Service.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
+    <DocumentationFile>bin\Release\net452\Rachio.NET.Service.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard1.6' And '$(TargetFramework)' != 'netcoreapp1.1'">
     <Reference Include="System.Collections.Concurrent" />
     <Reference Include="System" />
@@ -26,6 +34,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="PxtlCa.XmlCommentMarkDownGenerator" Version="0.2.6270.2853" />
     <PackageReference Include="System.Net.Http" Version="4.3.2" />
   </ItemGroup>
 
