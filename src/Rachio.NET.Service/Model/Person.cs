@@ -40,10 +40,10 @@ namespace Rachio.NET.Service.Model
         public DateTime CreateDate { get; set; }
         public bool Deleted { get; set; }
         public bool Enabled { get; set; }
-        public string UserName { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string DisplayUnit { get; set; }
-        public IEnumerable<Device> Devices { get; set; }
+        public string? UserName { get; set; }
+        public string? FullName { get; set; }
+        public string? Email { get; set; }
+        public string? DisplayUnit { get; set; }
+        public IEnumerable<Device> Devices { get; set; } = new List<Device>();
     }
 }

@@ -48,7 +48,7 @@ namespace Rachio.NET.Service.Infrastructure.Json
             throw new NotSupportedException("FactoryJsonConverter can only for deserializing.");
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
                 return null;
@@ -65,7 +65,7 @@ namespace Rachio.NET.Service.Infrastructure.Json
             return target;
         }
 
-        public virtual object Create(Type objectType)
+        public virtual object? Create(Type objectType)
         {
             return Activator.CreateInstance(_type);
         }

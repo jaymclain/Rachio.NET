@@ -31,8 +31,8 @@ namespace Rachio.NET.Service.Model
 {
     public class Entity
     {
-        internal IRachioServiceProvider ServiceProvider;
+        internal IRachioServiceProvider ServiceProvider = null!;
 
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
     }
 }

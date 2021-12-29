@@ -47,7 +47,10 @@ namespace Rachio.NET.Service
 
         public override object Create(Type objectType)
         {
-            var entity = (Entity)Activator.CreateInstance(_type);
+            var entity = (Entity?)Activator.CreateInstance(_type);
+            if (entity == null)
+                throw new InvalidOperationException();
+
             entity.ServiceProvider = _serviceProvider;
             return entity;
         }

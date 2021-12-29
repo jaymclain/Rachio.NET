@@ -35,8 +35,8 @@ namespace Rachio.NET.Service.Model
 {
     public class EventData : Entity
     {
-        public string Key { get; set; }
-        public string ConvertedValue { get; set; }
+        public string? Key { get; set; }
+        public string? ConvertedValue { get; set; }
         [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
         public DateTime CreateDate { get; set; }
         [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]

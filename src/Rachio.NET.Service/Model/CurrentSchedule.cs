@@ -35,14 +35,14 @@ namespace Rachio.NET.Service.Model
 {
     public class CurrentSchedule : Entity
     {
-        public string DeviceId { get; set; }
-        public string ScheduleId { get; set; }
-        public string Type { get; set; }
-        public string Status { get; set; }
+        public string? DeviceId { get; set; }
+        public string? ScheduleId { get; set; }
+        public string? Type { get; set; }
+        public string? Status { get; set; }
         [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         public int Duration { get; set; }
-        public string ZoneId { get; set; }
+        public string? ZoneId { get; set; }
         [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
         public DateTime ZoneStartDate { get; set; }
         public int ZoneDuration { get; set; }

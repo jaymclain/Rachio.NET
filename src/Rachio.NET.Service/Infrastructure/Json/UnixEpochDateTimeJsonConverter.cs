@@ -35,7 +35,7 @@ namespace Rachio.NET.Service.Infrastructure.Json
 {
     public class UnixEpochDateTimeJsonConverter : DateTimeConverterBase
     {
-        private static readonly UnixEpochDateTimeConverter Converter = new UnixEpochDateTimeConverter();
+        private static readonly UnixEpochDateTimeConverter Converter = new();
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -43,12 +43,10 @@ namespace Rachio.NET.Service.Infrastructure.Json
             writer.WriteRawValue(millisecondsSinceEpoch.ToString());
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.Value == null)
-            {
                 return null;
-            }
 
             var millisecondsSinceEpoch = (long)reader.Value;
             return Converter.Convert(millisecondsSinceEpoch);

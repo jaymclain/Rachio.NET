@@ -51,9 +51,9 @@ namespace Rachio.NET.Service.Model
         public double WindSpeed { get; set; }
         public double DewPoint { get; set; }
         public double Humidity { get; set; }
-        public string UnitType { get; set; }
-        public Uri IconUrl { get; set; }
-        public string WeatherSummary { get; set; }
-        public string WeatherType { get; set; }
+        public string? UnitType { get; set; }
+        public Uri? IconUrl { get; set; }
+        public string? WeatherSummary { get; set; }
+        public string? WeatherType { get; set; }
     }
 }

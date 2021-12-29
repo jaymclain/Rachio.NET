@@ -70,20 +70,16 @@ namespace Rachio.NET.Service
                     }).ToString();
         }
 
-        public Task<T> GetAsync<T>(string entity, string entityId, string action, object parameters)
+        public Task<T> GetAsync<T>(string entity, string? entityId, string? action, object? parameters)
         {
             var url = new Uri(string.Format(ServiceUrlFormat, ServiceApiVersion));
             url = new Uri(url, $"{entity}/");
 
             if (!string.IsNullOrWhiteSpace(entityId))
-            {
                 url = new Uri(url, $"{entityId}/");
-            }
 
             if (!string.IsNullOrWhiteSpace(action))
-            {
                 url = new Uri(url, $"{action}");
-            }
 
             if (parameters != null)
             {
@@ -94,15 +90,13 @@ namespace Rachio.NET.Service
             return GetAsync<T>(url);
         }
 
-        public Task PutAsync(string entity, object parameters, string action)
+        public Task PutAsync(string entity, object parameters, string? action)
         {
             var url = new Uri(string.Format(ServiceUrlFormat, ServiceApiVersion));
             url = new Uri(url, $"{entity}/");
 
             if (!string.IsNullOrWhiteSpace(action))
-            {
                 url = new Uri(url, $"{action}");
-            }
 
             var body = _serializer.Serialize(parameters);
             var content = new StringContent(body, Encoding.UTF8, "application/json");
@@ -114,9 +108,7 @@ namespace Rachio.NET.Service
         {
             var response = _httpClient.GetAsync(url).Result;
             if (!response.IsSuccessStatusCode)
-            {
                 ThrowError(response);
-            }
 
             var content = response.Content.ReadAsStringAsync().Result;
             return Task.Run(() => _serializer.DeserializeObject<T>(content));

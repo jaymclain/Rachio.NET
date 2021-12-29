@@ -34,8 +34,8 @@ namespace Rachio.NET.Service.Model
 {
     public class Forecasts
     {
-        public Forecast Current { get; set; }
+        public Forecast? Current { get; set; }
         [JsonProperty("Forecast")]
-        public IEnumerable<Forecast> DailyForecasts { get; set; }
+        public IEnumerable<Forecast>? DailyForecasts { get; set; }
     }
 }

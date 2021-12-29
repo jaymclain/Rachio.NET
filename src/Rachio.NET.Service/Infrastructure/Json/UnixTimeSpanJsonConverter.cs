@@ -39,12 +39,10 @@ namespace Rachio.NET.Service.Infrastructure.Json
             throw new NotImplementedException();
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.Value == null)
-            {
                 return null;
-            }
 
             return new TimeSpan((long)reader.Value * TimeSpan.TicksPerSecond);
         }
