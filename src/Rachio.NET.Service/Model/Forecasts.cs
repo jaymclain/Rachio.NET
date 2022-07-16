@@ -30,12 +30,11 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Rachio.NET.Service.Model
+namespace Rachio.NET.Service.Model;
+
+public class Forecasts
 {
-    public class Forecasts
-    {
-        public Forecast? Current { get; set; }
-        [JsonProperty("Forecast")]
-        public IEnumerable<Forecast>? DailyForecasts { get; set; }
-    }
+    public Forecast? Current { get; set; }
+    [JsonProperty("Forecast")]
+    public IEnumerable<Forecast>? DailyForecasts { get; set; }
 }

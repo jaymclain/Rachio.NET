@@ -29,12 +29,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 using System;
 
-namespace Rachio.NET.Service.Model
+namespace Rachio.NET.Service.Model;
+
+public class CustomCrop
 {
-    public class CustomCrop
-    {
-        public string? Name { get; set; }
-        public Uri? ImageUrl { get; set; }
-        public double Coefficient { get; set; }
-    }
+    public string? Name { get; set; }
+    public Uri? ImageUrl { get; set; }
+    public double Coefficient { get; set; }
 }

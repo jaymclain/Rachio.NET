@@ -27,11 +27,10 @@
 //   Defines the ISerializer type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Rachio.NET.Service.Infrastructure.Json
+namespace Rachio.NET.Service.Infrastructure.Json;
+
+public interface ISerializer
 {
-    public interface ISerializer
-    {
-        string Serialize(object value);
-        T DeserializeObject<T>(string content);
-    }
+    string Serialize(object value);
+    T? DeserializeObject<T>(string content);
 }

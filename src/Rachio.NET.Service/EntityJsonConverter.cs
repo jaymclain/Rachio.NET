@@ -31,28 +31,27 @@ using System;
 using Rachio.NET.Service.Infrastructure.Json;
 using Rachio.NET.Service.Model;
 
-namespace Rachio.NET.Service
+namespace Rachio.NET.Service;
+
+internal class EntityJsonConverter : FactoryJsonConverter
 {
-    internal class EntityJsonConverter : FactoryJsonConverter
+    private readonly Type _type;
+    private readonly IRachioServiceProvider _serviceProvider;
+
+    public EntityJsonConverter(Type type, IRachioServiceProvider serviceProvider)
+        : base(type)
     {
-        private readonly Type _type;
-        private readonly IRachioServiceProvider _serviceProvider;
+        _type = type;
+        _serviceProvider = serviceProvider;
+    }
 
-        public EntityJsonConverter(Type type, IRachioServiceProvider serviceProvider)
-            : base(type)
-        {
-            _type = type;
-            _serviceProvider = serviceProvider;
-        }
+    public override object Create(Type objectType)
+    {
+        var entity = (Entity?)Activator.CreateInstance(_type);
+        if (entity == null)
+            throw new InvalidOperationException();
 
-        public override object Create(Type objectType)
-        {
-            var entity = (Entity?)Activator.CreateInstance(_type);
-            if (entity == null)
-                throw new InvalidOperationException();
-
-            entity.ServiceProvider = _serviceProvider;
-            return entity;
-        }
+        entity.ServiceProvider = _serviceProvider;
+        return entity;
     }
 }

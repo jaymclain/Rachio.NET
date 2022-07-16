@@ -33,31 +33,30 @@ using Newtonsoft.Json;
 using Rachio.NET.Service.Infrastructure.Json;
 using Rachio.NET.Service.Model;
 
-namespace Rachio.NET.Service
+namespace Rachio.NET.Service;
+
+public class RachioEntitySerializer : ISerializer
 {
-    public class RachioEntitySerializer : ISerializer
+    private readonly JsonConverter[] _entityConverters; 
+
+    public RachioEntitySerializer(IRachioServiceProvider serviceProvider)
     {
-        private readonly JsonConverter[] _entityConverters; 
+        var entityType = typeof(Entity);
+        _entityConverters = entityType.GetTypeInfo().Assembly
+            .GetTypes()
+            .Where(t => t != entityType && entityType.GetTypeInfo().IsAssignableFrom(t))
+            .Select(t => new EntityJsonConverter(t, serviceProvider))
+            .Cast<JsonConverter>()
+            .ToArray();
+    }
 
-        public RachioEntitySerializer(IRachioServiceProvider serviceProvider)
-        {
-            var entityType = typeof(Entity);
-            _entityConverters = entityType.GetTypeInfo().Assembly
-                .GetTypes()
-                .Where(t => t != entityType && entityType.GetTypeInfo().IsAssignableFrom(t))
-                .Select(t => new EntityJsonConverter(t, serviceProvider))
-                .Cast<JsonConverter>()
-                .ToArray();
-        }
+    public string Serialize(object value)
+    {
+        return JsonConvert.SerializeObject(value);
+    }
 
-        public string Serialize(object value)
-        {
-            return JsonConvert.SerializeObject(value);
-        }
-
-        public T DeserializeObject<T>(string content)
-        {
-            return JsonConvert.DeserializeObject<T>(content, _entityConverters);
-        }
+    public T? DeserializeObject<T>(string content)
+    {
+        return JsonConvert.DeserializeObject<T>(content, _entityConverters);
     }
 }

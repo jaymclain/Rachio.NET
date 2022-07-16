@@ -1,8 +1,7 @@
-﻿using System;
-using Rachio.NET.Service;
+﻿using Rachio.NET.Service;
 using Xunit;
 
-namespace Rachio.NETCore11.Service.UnitTests
+namespace Rachio.Service.UnitTests
 {
     public class RachioServiceTests
     {

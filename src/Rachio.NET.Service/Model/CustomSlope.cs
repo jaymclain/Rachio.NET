@@ -29,13 +29,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 using System;
 
-namespace Rachio.NET.Service.Model
+namespace Rachio.NET.Service.Model;
+
+public class CustomSlope
 {
-    public class CustomSlope
-    {
-        public string? Name { get; set; }
-        public Uri? ImageUrl { get; set; }
-        public int SortOrder { get; set; }
-        public string? Variance { get; set; }
-    }
+    public string? Name { get; set; }
+    public Uri? ImageUrl { get; set; }
+    public int SortOrder { get; set; }
+    public string? Variance { get; set; }
 }

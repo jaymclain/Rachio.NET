@@ -1,13 +1,12 @@
 ﻿using System.IO;
 using Rachio.NET.Service;
 
-namespace Rachio.NETCore11.Service.AcceptanceTests
+namespace Rachio.Service.AcceptanceTests;
+
+public class TestServiceOptions : ServiceOptions
 {
-    public class TestServiceOptions : ServiceOptions
+    public TestServiceOptions()
     {
-        public TestServiceOptions()
-        {
-           AccessToken = File.ReadAllText("AccessToken.txt");
-        }
+        AccessToken = File.ReadAllText("AccessToken.txt");
     }
 }

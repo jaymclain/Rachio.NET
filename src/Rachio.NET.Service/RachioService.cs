@@ -29,85 +29,82 @@
 // --------------------------------------------------------------------------------------------------------------------
 using Rachio.NET.Service.Model;
 
-namespace Rachio.NET.Service
+namespace Rachio.NET.Service;
+
+/// <summary>
+/// The main service for interaction with the Rachio Smart Sprinkler Controller
+/// </summary>
+public class RachioService
 {
-    using System.Diagnostics.CodeAnalysis;
+    private const string InfoAction = "info";
+    private const string PersonEntity = "person";
+    private const string DeviceEntity = "device";
+    private const string ZoneEntity = "zone";
+
+    private readonly IRachioServiceProvider _serviceProvider;
+
+    public RachioService(ServiceOptions serviceOptions)
+    {
+        _serviceProvider = new RachioServiceProvider(serviceOptions);
+    }
 
     /// <summary>
-    /// The main service for interaction with the Rachio Smart Sprinkler Controller
+    /// Creates the Rachio Smart Sprinkler Controller communications service
     /// </summary>
-    public class RachioService
+    /// <param name="options">Options for the RachioService</param>
+    /// <returns>The RachioService</returns>
+    /// <code>
+    ///     var service = RachioService.Create(new ServiceOptions { AccessToken = "{Your Access Token}" });
+    /// </code>
+    public static RachioService Create(ServiceOptions options)
     {
-        private const string InfoAction = "info";
-        private const string PersonEntity = "person";
-        private const string DeviceEntity = "device";
-        private const string ZoneEntity = "zone";
+        return new RachioService(options);
+    }
 
-        private readonly IRachioServiceProvider _serviceProvider;
+    /// <summary>
+    /// Retrieves the information for the person currently logged in.
+    /// </summary>
+    /// <returns>The Person entity</returns>
+    /// <code>
+    ///     var service = RachioService.Create(new ServiceOptions { AccessToken = "{Your Access Token}" });
+    ///     var person = service.Person();
+    /// </code>
+    public Person? Person()
+    {
+        // person/info
+        var current = _serviceProvider.GetAsync<Person>(PersonEntity, action: InfoAction).Result;
+        return current;
+    }
 
-        public RachioService(ServiceOptions serviceOptions)
-        {
-            _serviceProvider = new RachioServiceProvider(serviceOptions);
-        }
+    /// <summary>
+    /// Retrieves the information for a specific person
+    /// </summary>
+    /// <param name="id">A unique person id</param>
+    /// <returns>The Person entity</returns>
+    public Person? Person(string id)
+    {
+        // person/{id}
+        return _serviceProvider.GetAsync<Person>(PersonEntity, id).Result;
+    }
 
-        /// <summary>
-        /// Creates the Rachio Smart Sprinkler Controller communications service
-        /// </summary>
-        /// <param name="options">Options for the RachioService</param>
-        /// <returns>The RachioService</returns>
-        /// <code>
-        ///     var service = RachioService.Create(new ServiceOptions { AccessToken = "{Your Access Token}" });
-        /// </code>
-        public static RachioService Create(ServiceOptions options)
-        {
-            return new RachioService(options);
-        }
+    /// <summary>
+    /// Retrieve the information for a specific device
+    /// </summary>
+    /// <param name="id">A unique device id</param>
+    /// <returns>The Device entity</returns>
+    public Device? Device(string id)
+    {
+        // device/{id}
+        return _serviceProvider.GetAsync<Device>(DeviceEntity, id).Result;
+    }
 
-        /// <summary>
-        /// Retrieves the information for the person currently logged in.
-        /// </summary>
-        /// <returns>The Person entity</returns>
-        /// <code>
-        ///     var service = RachioService.Create(new ServiceOptions { AccessToken = "{Your Access Token}" });
-        ///     var person = service.Person();
-        /// </code>
-        public Person Person()
-        {
-            // person/info
-            var current = _serviceProvider.GetAsync<Person>(PersonEntity, action: InfoAction).Result;
-            return Person(current.Id);
-        }
-
-        /// <summary>
-        /// Retrieves the information for a specific person
-        /// </summary>
-        /// <param name="id">A unique person id</param>
-        /// <returns>The Person entity</returns>
-        public Person Person(string id)
-        {
-            // person/{id}
-            return _serviceProvider.GetAsync<Person>(PersonEntity, id).Result;
-        }
-
-        /// <summary>
-        /// Retrieve the information for a specific device
-        /// </summary>
-        /// <param name="id">A unique device id</param>
-        /// <returns>The Device entity</returns>
-        public Device Device(string id)
-        {
-            // device/{id}
-            return _serviceProvider.GetAsync<Device>(DeviceEntity, id).Result;
-        }
-
-        /// <summary>
-        /// Retrieves the information for a specific zone
-        /// </summary>
-        /// <param name="id">A unique zone id</param>
-        /// <returns>The Zone entity</returns>
-        public Zone Zone(string id)
-        {
-            return _serviceProvider.GetAsync<Zone>(ZoneEntity, id).Result;
-        }
+    /// <summary>
+    /// Retrieves the information for a specific zone
+    /// </summary>
+    /// <param name="id">A unique zone id</param>
+    /// <returns>The Zone entity</returns>
+    public Zone? Zone(string id)
+    {
+        return _serviceProvider.GetAsync<Zone>(ZoneEntity, id).Result;
     }
 }

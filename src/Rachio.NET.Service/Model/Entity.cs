@@ -27,12 +27,11 @@
 //   Defines the Entity type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Rachio.NET.Service.Model
-{
-    public class Entity
-    {
-        internal IRachioServiceProvider ServiceProvider = null!;
+namespace Rachio.NET.Service.Model;
 
-        public string Id { get; set; } = null!;
-    }
+public class Entity
+{
+    internal IRachioServiceProvider ServiceProvider = null!;
+
+    public string Id { get; set; } = null!;
 }

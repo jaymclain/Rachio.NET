@@ -1,22 +1,21 @@
 using Rachio.NET.Service;
 using Xunit;
 
-namespace Rachio.NETCore11.Service.AcceptanceTests
+namespace Rachio.Service.AcceptanceTests;
+
+public class PersonTests
 {
-    public class PersonTests
+    [Fact]
+    public void When_Invoked_Should_Get_CurrentPerson()
     {
-        [Fact]
-        public void When_Invoked_Should_Get_CurrentPerson()
-        {
-            // Arrange
-            var service = RachioService.Create(new TestServiceOptions());
+        // Arrange
+        var service = RachioService.Create(new TestServiceOptions());
 
-            // Act
-            var currentPerson = service.Person();
+        // Act
+        var currentPerson = service.Person();
 
-            // Assert
-            Assert.NotNull(currentPerson);
-            Assert.True(!string.IsNullOrEmpty(currentPerson.Id));
-        }
+        // Assert
+        Assert.NotNull(currentPerson);
+        Assert.True(!string.IsNullOrEmpty(currentPerson?.Id));
     }
 }

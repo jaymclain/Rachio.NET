@@ -31,15 +31,14 @@ using System;
 using Newtonsoft.Json;
 using Rachio.NET.Service.Infrastructure.Json;
 
-namespace Rachio.NET.Service.Model
+namespace Rachio.NET.Service.Model;
+
+public class EventData : Entity
 {
-    public class EventData : Entity
-    {
-        public string? Key { get; set; }
-        public string? ConvertedValue { get; set; }
-        [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
-        public DateTime CreateDate { get; set; }
-        [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
-        public DateTime LastUpdateDate { get; set; }
-    }
+    public string? Key { get; set; }
+    public string? ConvertedValue { get; set; }
+    [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
+    public DateTime CreateDate { get; set; }
+    [JsonConverter(typeof(UnixEpochDateTimeJsonConverter))]
+    public DateTime LastUpdateDate { get; set; }
 }

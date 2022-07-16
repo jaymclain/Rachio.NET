@@ -30,20 +30,19 @@
 
 using System;
 
-namespace Rachio.NET.Service.Infrastructure
+namespace Rachio.NET.Service.Infrastructure;
+
+public class UnixEpochDateTimeConverter
 {
-    public class UnixEpochDateTimeConverter
+    private static readonly DateTime Epoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+    public long Convert(DateTime date)
     {
-        private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        return (long)(date - Epoch).TotalMilliseconds;
+    }
 
-        public long Convert(DateTime date)
-        {
-           return (long)(date - Epoch).TotalMilliseconds;
-        }
-
-        public DateTime Convert(long millisecondsSinceEpoch)
-        {
-            return Epoch.AddMilliseconds(millisecondsSinceEpoch);
-        }
+    public DateTime Convert(long millisecondsSinceEpoch)
+    {
+        return Epoch.AddMilliseconds(millisecondsSinceEpoch);
     }
 }

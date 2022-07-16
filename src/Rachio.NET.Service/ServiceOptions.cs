@@ -27,10 +27,9 @@
 //   Defines the ServiceOptions type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Rachio.NET.Service
+namespace Rachio.NET.Service;
+
+public class ServiceOptions
 {
-    public class ServiceOptions
-    {
-        public string AccessToken { get; set; } = null!;
-    }
+    public string AccessToken { get; set; } = null!;
 }
